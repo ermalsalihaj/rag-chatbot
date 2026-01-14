@@ -8,3 +8,6 @@ langchain-huggingface
 sentence-transformers
 numpy
 faiss-cpu
+langchain-openai
+openai
+tiktoken

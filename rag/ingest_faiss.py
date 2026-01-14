@@ -8,15 +8,15 @@ from langchain_community.vectorstores import FAISS
 
 from rag.config import DOCS_DIR, INDEX_DIR
 
-def load_documents():
+def load_documents(docs_dir: str):
     docs = []
 
-    pdfs = glob(os.path.join(DOCS_DIR, "**/*.pdf"), recursive=True)
-    txts = glob(os.path.join(DOCS_DIR, "**/*.txt"), recursive=True)
-    mds  = glob(os.path.join(DOCS_DIR, "**/*.md"),  recursive=True)
+    pdfs = glob(os.path.join(docs_dir, "**/*.pdf"), recursive=True)
+    txts = glob(os.path.join(docs_dir, "**/*.txt"), recursive=True)
+    mds  = glob(os.path.join(docs_dir, "**/*.md"), recursive=True)
 
     for path in pdfs:
-        docs.extend(PyPDFLoader(path).load())  # metadata includes source + page
+        docs.extend(PyPDFLoader(path).load())
 
     for path in txts:
         docs.extend(TextLoader(path, encoding="utf-8").load())
@@ -29,9 +29,9 @@ def load_documents():
 def main():
     os.makedirs(INDEX_DIR, exist_ok=True)
 
-    docs = load_documents()
+    docs = load_documents(DOCS_DIR)
     if not docs:
-        raise SystemExit(f"No docs found in {DOCS_DIR}. Put PDFs in that folder first.")
+        raise SystemExit(f"No documents found in {DOCS_DIR}. Put PDFs there first.")
 
     splitter = RecursiveCharacterTextSplitter(chunk_size=900, chunk_overlap=150)
     chunks = splitter.split_documents(docs)

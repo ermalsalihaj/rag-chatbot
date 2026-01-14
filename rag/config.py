@@ -5,7 +5,8 @@ load_dotenv()
 
 DOCS_DIR = "data/raw/pubmed"
 INDEX_DIR = "data/index/faiss"
+COLLECTION_NAME = "rag_docs"
 
 TOP_K = 4
-
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_MODEL = "gpt-4o-mini"
