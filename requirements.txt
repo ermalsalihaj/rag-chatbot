@@ -9,3 +9,6 @@ faiss-cpu
 langchain-openai
 openai
 tiktoken
+rank_bm25
+pandas
+matplotlib
