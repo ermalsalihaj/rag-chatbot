@@ -1,9 +1,8 @@
 from typing import Dict, Any, List, Tuple
 import os
 
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
-from langchain_openai import ChatOpenAI
 
 from rag.config import INDEX_DIR, TOP_K, OPENAI_MODEL
 from rag.safety import looks_like_prompt_injection
@@ -17,7 +16,7 @@ Answer concisely.
 """
 
 def load_db():
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = OpenAIEmbeddings()
     return FAISS.load_local(INDEX_DIR, embeddings, allow_dangerous_deserialization=True)
 
 def format_citations(docs) -> List[str]:

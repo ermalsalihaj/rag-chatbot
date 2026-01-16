@@ -1,9 +1,15 @@
 import os
+import sys
+from pathlib import Path
 from glob import glob
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
 from rag.config import DOCS_DIR, INDEX_DIR
@@ -36,7 +42,7 @@ def main():
     splitter = RecursiveCharacterTextSplitter(chunk_size=900, chunk_overlap=150)
     chunks = splitter.split_documents(docs)
 
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = OpenAIEmbeddings()
 
     vectordb = FAISS.from_documents(chunks, embeddings)
     vectordb.save_local(INDEX_DIR)
