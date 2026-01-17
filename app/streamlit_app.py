@@ -10,9 +10,9 @@ from rag.rag_faiss import answer_question
 
 LOG_CSV_PATH = os.path.join("data", "observability", "rag_logs.csv")
 
-st.set_page_config(page_title="RAG Chatbot (FAISS + LangChain)", page_icon="🤖")
-st.title("RAG Chatbot (FAISS + LangChain)")
-st.caption("Put docs into data/raw/pubmed, run ingestion, then ask questions with citations.")
+st.set_page_config(page_title="RAG Chatbot", page_icon="🤖")
+st.title("RAG Chatbot")
+st.caption("Ask the chatbot questions about healthcare research, AI in medicine, clinical informatics, and more!")
 
 tab_chat, tab_obs = st.tabs(["Chat", "Observability"])
 
