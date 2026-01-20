@@ -9,10 +9,27 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Vector databases / embeddings
-data/
-storage/
-chroma/
+# Ignore all data by default
+data/*
+
+# ---- ALLOW DATASET (PDFs) ----
+!data/raw/
+!data/raw/pubmed/
+!data/raw/pubmed/**/*.pdf
+
+# ---- ALLOW FAISS INDEX ----
+!data/index/
+!data/index/faiss/
+!data/index/faiss/index.faiss
+!data/index/faiss/index.pkl
+
+# Ignore observability logs
+data/observability/
+data/observability/*.csv
+
+# Ignore chunk debug artifacts
+data/index/chunks.jsonl
+
 
 # Streamlit
 .streamlit/
